@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once('getid3/getid3.php');
-  // script to grab a random song, get the id3 info from get_id3.php
+  // script to grab a random song, get the id3 info from id3 lib
   // and pass back json containing all the appropriate info
 
   $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('../music/'));
