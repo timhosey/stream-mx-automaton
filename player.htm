@@ -1,15 +1,21 @@
 <html>
   <head>
     <title>StreamMXAutomaton</title>
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="player.css" />
   </head>
   <body onload="playRandomSong();">
     <audio controls autoplay="true" preload="metadata" style="width:300px;" id="musicplayer">
       <!-- <source src="DTPKTheme.mp3" type="audio/mp3"> -->
       Your browser does not support the audio element.
     </audio>
-
-    <img id="albumart" width="150" src="" height="150">
+    <div id="bottom-lower-third">
+      <img id="albumart" width="300" src="" height="300" />
+      <div id="songblock">
+        <div id="songtitle">???</div>
+        <div id="songartist">???</div>
+        <div id="songalbum">???</div>
+      </div>
+    </div>
 
     <script src="player.js"> </script>
   </body>

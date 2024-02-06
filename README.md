@@ -17,6 +17,9 @@ Primary recommendations:
 * PHP-compatible server, Apache being the easiest
 * Enough storage to hold all your audio files, or some sort of referential spot (NAS or networked file system is probably the best)
 
+## Font
+The font used here is Kabel Black Regular. It's close to what MTV used for its music videos back in the day. I got it from https://fontsgeek.com/fonts/kabel-black-regular; if it needs to be removed from my repo let me know and I'll drop it as needed.
+
 ## Disclaimers
 This software is not intended for you to break copyright. Be sure you own the rights to the music, or at the very least that it's not strictly enforced for use.
 
