@@ -39,16 +39,16 @@ body {
 #songtitle {
   color: #fff;
   display: block;
-  font-size: 36px;
+  font-size: 54px;
 }
 
 #songartist {
   color: #fff;
   display: block;
-  font-size: 24px;
+  font-size: 42px;
 }
 #songalbum {
   color: #fff;
   display: block;
-  font-size: 20px;
+  font-size: 28px;
 }
