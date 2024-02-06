@@ -23,3 +23,9 @@ This software is not intended for you to break copyright. Be sure you own the ri
 If you're using this on Twitch, be sure *not* to save your VODs, as they WILL get copyright struck and likely will get your account suspended.
 
 YouTube is way more aggressive with copyright, so be wary of your use case and library offerings.
+
+## TODO
+* Add CSS styling
+* Add blocks for artist, song title, album
+* Add JS for auto-updating those entries
+* Test end-to-end using OBS
