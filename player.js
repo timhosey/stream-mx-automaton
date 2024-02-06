@@ -11,9 +11,9 @@ function playRandomSong() {
     if (this.readyState == 4 && this.status == 200) {
       var mplayer = document.getElementById("musicplayer");
       var artwork = document.getElementById("albumart");
-      var artist = document.getElementById("artist");
-      var title = document.getElementById("title");
-      var album = document.getElementById("album");
+      var artist = document.getElementById("songartist");
+      var title = document.getElementById("songtitle");
+      var album = document.getElementById("songalbum");
       var json = JSON.parse(this.responseText);
       // Replace the ../ entry with ./ since we're running this page from the base
       mplayer.src = json['selected_file'].replace('../', './');
@@ -23,6 +23,9 @@ function playRandomSong() {
       } else {
         artwork.style.display = 'none';
       }
+      artist.innertext = json['artist'];
+      title.innertext = json['title'];
+      album.innertext = json['artist'];
       mplayer.play();
       console.log(this.responseText);
     }
