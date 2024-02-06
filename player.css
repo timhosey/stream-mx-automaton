@@ -10,7 +10,7 @@ body {
 }
 
 #musicplayer {
-  display: none;
+  opacity:0;
 }
 
 #bottom-lower-third {
