@@ -18,16 +18,16 @@ function playRandomSong() {
       // Replace the ../ entry with ./ since we're running this page from the base
       mplayer.src = json['selected_file'].replace('../', './');
       if (json['album_art'] == true) { 
-        artwork.style.display = 'block';
+        artwork.style.display = 'inline-block';
         artwork.src = json['album_art_data'];
       } else {
         artwork.style.display = 'none';
       }
-      artist.innertext = json['artist'];
-      title.innertext = json['title'];
-      album.innertext = json['artist'];
+      artist.innerText = json['artist'];
+      title.innerText = json['title'];
+      album.innerText = json['album'];
       mplayer.play();
-      console.log(this.responseText);
+      console.log('updated and playing '+json['title']+' by '+json['artist']);
     }
   }
   // Sending our request 
