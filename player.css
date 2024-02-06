@@ -1,8 +1,12 @@
+@font-face {
+  font-family: 'kabelblack';
+  src: url('./Kabel_Black_Regular.otf');
+}
+
 body {
-  height: 100%;
-  width: 100%;
   top: 0;
-  background: #000;
+  background: #fff;
+  font-family: 'kabelblack';
 }
 
 #musicplayer {
@@ -10,36 +14,41 @@ body {
 }
 
 #bottom-lower-third {
-  bottom: 30px;
+  bottom: 20px;
   width: 100%;
-  height: 33%;
-  left: 30px;
+  height: 150px;
+  left: 20px;
   display: block;
+  position: fixed;
 }
 
 #albumart {
-  height: 300px;
-  width: 300px;
-  display: block;
-  bottom: 30px;
+  height: 150px;
+  width: 150px;
+  display: inline-block;
 }
 
 #songblock {
-  left: 310px;
-  height: 300px;
-  display: block;
+  height: 150px;
+  padding-left: 10px;
+  display: inline-block;
+  vertical-align:auto;
+  text-shadow: 1px 1px 4px black;
 }
 
-#songblock #songtitle {
+#songtitle {
   color: #fff;
   display: block;
+  font-size: 36px;
 }
 
-#songblock #songartist {
+#songartist {
   color: #fff;
   display: block;
+  font-size: 24px;
 }
-#songblock #songalbum {
+#songalbum {
   color: #fff;
   display: block;
+  font-size: 20px;
 }
