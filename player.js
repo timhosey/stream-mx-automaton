@@ -34,7 +34,31 @@ function playRandomSong() {
   xhr.send();
 }
 
+function selectRandomBg() {
+  // Creating Our XMLHttpRequest object 
+  let xhr = new XMLHttpRequest();
+ 
+  // Making our connection  
+  let url = './lib/random_bg.php';
+  xhr.open("GET", url, true);
+
+  // function execute after request is successful 
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var bgimage = document.getElementById("background-video");
+      var json = JSON.parse(this.responseText);
+      // Replace the ../ entry with ./ since we're running this page from the base
+      bgimage.src = json['bg_file'].replace('../', './');
+      bgimage.play();
+      console.log('changed bg to '+json['bg_file']);
+    }
+  }
+  // Sending our request 
+  xhr.send();
+}
+
 var mplayer = document.getElementById("musicplayer");
 mplayer.onended = function() {
   playRandomSong();
+  selectRandomBg();
 };
