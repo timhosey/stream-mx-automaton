@@ -16,7 +16,7 @@ function playRandomSong() {
       var album = document.getElementById("songalbum");
       var json = JSON.parse(this.responseText);
       // Replace the ../ entry with ./ since we're running this page from the base
-      mplayer.src = json['selected_file'].replace('../', './');
+      mplayer.src = json['song_url'].replace('../', './');
       if (json['album_art'] == true) { 
         artwork.style.display = 'inline-block';
         artwork.src = json['album_art_data'];
@@ -27,7 +27,7 @@ function playRandomSong() {
       title.innerText = json['title'];
       album.innerText = json['album'];
       mplayer.play();
-      console.log('updated and playing '+json['title']+' by '+json['artist']);
+      console.log('updated and playing '+json['title']+' by '+json['artist']+', url: '+json['song_url']);
     }
   }
   // Sending our request 
