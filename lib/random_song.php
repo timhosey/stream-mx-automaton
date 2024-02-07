@@ -48,7 +48,7 @@ require_once('getid3/getid3.php');
     $selectedFile = selectSong($files);
 
     $id3Data['selected_file'] = $selectedFile;
-    $id3Data['song_url'] = implode('/', array_map('urlencode', explode('/', $selectedFile)));
+    $id3Data['song_url'] = implode('/', array_map('rawurlencode', explode('/', $selectedFile)));
 
     $tag = $getID3->analyze($selectedFile);
   }
