@@ -7,19 +7,32 @@ require_once('getid3/getid3.php');
   // script to grab a random song, get the id3 info from id3 lib
   // and pass back json containing all the appropriate info
 
-  $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('../music/'));
-  $files = array(); 
+  // Set our JSON file
+  $filesJsonFile = 'files.json';
 
-  /** @var SplFileInfo $file */
-  foreach ($rii as $file) {
-      if ($file->isDir()){
-        continue;
-      }
-      $extension = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
-      if ($extension == 'mp3') {
-        $files[] = $file->getPathname();
-      }
+  // First, we check to see if our file with our JSON is older than an hour
+  if (!file_exists($filesJsonFile) || time()-filemtime($filename) > 3600) {
+    // We'll build our array starting with this iterator...
+    $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('../music/'));
+    $files = array(); 
+
+    /** @var SplFileInfo $file */
+    foreach ($rii as $file) {
+        if ($file->isDir()){
+          continue;
+        }
+        $extension = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
+        if ($extension == 'mp3') {
+          $files[] = $file->getPathname();
+        }
+    }
+
+    file_put_contents($filesJsonFile, json_encode($files));
   }
+
+  $files = json_decode(file_get_contents($filesJsonFile), true);
+
+  // Now, we'll store said array into a file as JSON
 
   $id3Data = array();
 
@@ -36,7 +49,7 @@ require_once('getid3/getid3.php');
   $tag = $getID3->analyze($selectedFile);
   
   // Selects a new song if it's less than 1:15 / 75 seconds
-  while ($tag['playtime_seconds'] < 75) {
+  while (is_null($tag['playtime_seconds']) || $tag['playtime_seconds'] < 75) {
     $selectedFile = selectSong($files);
 
     $id3Data['selected_file'] = $selectedFile;
