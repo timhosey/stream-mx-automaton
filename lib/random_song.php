@@ -42,14 +42,9 @@ require_once('getid3/getid3.php');
   }
 
   $tag = array();
-  $selectedFile = selectSong($files);
-
-  $id3Data['selected_file'] = $selectedFile;
-
-  $tag = $getID3->analyze($selectedFile);
   
   // Selects a new song if it's less than 1:15 / 75 seconds
-  while (is_null($tag['playtime_seconds']) || $tag['playtime_seconds'] < 75) {
+  while (empty($tag['playtime_seconds']) || $tag['playtime_seconds'] < 75) {
     $selectedFile = selectSong($files);
 
     $id3Data['selected_file'] = $selectedFile;
