@@ -24,11 +24,25 @@ require_once('getid3/getid3.php');
   $id3Data = array();
 
   $getID3 = new getID3;
-  $selectedFile = $files[array_rand($files, 1)];
+  function selectSong($files) {
+    return $files[array_rand($files, 1)];
+  }
+
+  $tag = array();
+  $selectedFile = selectSong($files);
 
   $id3Data['selected_file'] = $selectedFile;
 
   $tag = $getID3->analyze($selectedFile);
+  
+  // Selects a new song if it's less than 1:15 / 75 seconds
+  while ($tag['playtime_seconds'] < 75) {
+    $selectedFile = selectSong($files);
+
+    $id3Data['selected_file'] = $selectedFile;
+
+    $tag = $getID3->analyze($selectedFile);
+  }
   if (isset($tag['comments']['picture'][0]['image_mime'])) {
     $id3Data['album_art'] = true;
     $id3Data['album_art_data'] = base64_encode($tag['comments']['picture'][0]['data']);
@@ -43,6 +57,7 @@ require_once('getid3/getid3.php');
   $id3Data['artist'] = $tag['tags']['id3v2']['artist'];
   $id3Data['title'] = $tag['tags']['id3v2']['title'];
   $id3Data['album'] = $tag['tags']['id3v2']['album'];
+  $id3Data['length'] = $tag['playtime_seconds'];
 
   header("Content-Type: application/json");
   // echo json_encode($id3Data);
