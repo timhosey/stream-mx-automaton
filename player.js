@@ -58,6 +58,26 @@ function selectRandomBg() {
 }
 
 var mplayer = document.getElementById("musicplayer");
+var timeleft = document.getElementById("timeleft");
+
+function str_pad_left(string, pad, length) {
+  return (new Array(length + 1).join(pad) + string).slice(-length);
+}
+
+mplayer.ontimeupdate = (event) => {
+  var total_min = Math.floor(mplayer.duration / 60);
+  var total_sec = Math.floor(mplayer.duration - total_min * 60);
+
+  var remaining_min = Math.floor(mplayer.currentTime / 60);
+  var remaining_sec = Math.floor(mplayer.currentTime - remaining_min * 60);
+
+  var total_time = str_pad_left(total_min, '0', 2) + ':' + str_pad_left(total_sec, '0', 2);
+
+  var remaining_time = str_pad_left(remaining_min, '0', 2) + ':' + str_pad_left(remaining_sec, '0', 2);
+  
+  timeleft.innerText = remaining_time + ' / ' + total_time;
+};
+
 mplayer.onended = function() {
   playRandomSong();
   selectRandomBg();
