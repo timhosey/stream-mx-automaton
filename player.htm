@@ -3,7 +3,10 @@
     <title>StreamMXAutomaton</title>
     <link rel="stylesheet" href="player.css" />
   </head>
-  <body onload="playRandomSong();">
+  <body onload="playRandomSong();selectRandomBg();">
+    <video id="background-video" autoplay loop muted>
+      <!-- <source src="backgrounds/jinx-moewalls-com.mp4" type="video/mp4"> -->
+    </video>
     <audio controls autoplay="true" preload="metadata" style="width:300px;" id="musicplayer">
       <!-- <source src="DTPKTheme.mp3" type="audio/mp3"> -->
       Your browser does not support the audio element.
