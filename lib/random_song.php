@@ -11,7 +11,7 @@ require_once('getid3/getid3.php');
   $filesJsonFile = 'files.json';
 
   // First, we check to see if our file with our JSON is older than an hour
-  if (!file_exists($filesJsonFile) || time()-filemtime($filename) > 3600) {
+  if (!file_exists($filesJsonFile) || time()-filemtime($filesJsonFile) > 3600) {
     // We'll build our array starting with this iterator...
     $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('../music/'));
     $files = array(); 
