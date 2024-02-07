@@ -2,3 +2,4 @@
 music/
 backgrounds/
 .DS_Store
+*.json
