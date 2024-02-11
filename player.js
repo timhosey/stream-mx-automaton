@@ -1,3 +1,5 @@
+var songDetails = [];
+
 function playRandomSong() {
   // Creating Our XMLHttpRequest object 
   let xhr = new XMLHttpRequest();
@@ -9,25 +11,31 @@ function playRandomSong() {
   // function execute after request is successful 
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      var mplayer = document.getElementById("musicplayer");
-      var artwork = document.getElementById("albumart");
-      var artist = document.getElementById("songartist");
-      var title = document.getElementById("songtitle");
-      var album = document.getElementById("songalbum");
-      var json = JSON.parse(this.responseText);
-      // Replace the ../ entry with ./ since we're running this page from the base
-      mplayer.src = json['song_url'].replace('../', './');
-      if (json['album_art'] == true) { 
-        artwork.style.display = 'inline-block';
-        artwork.src = json['album_art_data'];
-      } else {
-        artwork.style.display = 'none';
+      try {
+        var mplayer = document.getElementById("musicplayer");
+        var artwork = document.getElementById("albumart");
+        var artist = document.getElementById("songartist");
+        var title = document.getElementById("songtitle");
+        var album = document.getElementById("songalbum");
+        var json = JSON.parse(this.responseText);
+        // Replace the ../ entry with ./ since we're running this page from the base
+        mplayer.src = json['song_url'].replace('../', './');
+        if (json['album_art'] == true) { 
+          artwork.style.display = 'inline-block';
+          artwork.src = json['album_art_data'];
+        } else {
+          artwork.style.display = 'none';
+        }
+        artist.innerText = json['artist'];
+        title.innerText = json['title'];
+        album.innerText = json['album'];
+        mplayer.play();
+        console.log('updated and playing '+json['title']+' by '+json['artist']+', url: '+json['song_url']);
+        songDetails = json;
+        return true;
+      } catch (error) {
+        return false;
       }
-      artist.innerText = json['artist'];
-      title.innerText = json['title'];
-      album.innerText = json['album'];
-      mplayer.play();
-      console.log('updated and playing '+json['title']+' by '+json['artist']+', url: '+json['song_url']);
     }
   }
   // Sending our request 
@@ -76,9 +84,22 @@ mplayer.ontimeupdate = (event) => {
   var remaining_time = str_pad_left(remaining_min, '0', 2) + ':' + str_pad_left(remaining_sec, '0', 2);
   
   timeleft.innerText = remaining_time + ' / ' + total_time;
+
+  // Ensure contents of artist, title, album are populated
+  var artwork = document.getElementById("albumart");
+  var artist = document.getElementById("songartist");
+  var title = document.getElementById("songtitle");
+  var album = document.getElementById("songalbum");
+
+  artist.innerText = json['artist'];
+  title.innerText = json['title'];
+  album.innerText = json['album'];
 };
 
 mplayer.onended = function() {
-  playRandomSong();
+  var status = false;
+  while (!status) {
+    status = playRandomSong();
+  }
   selectRandomBg();
 };
