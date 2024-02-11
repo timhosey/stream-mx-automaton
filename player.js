@@ -98,8 +98,12 @@ mplayer.ontimeupdate = (event) => {
 
 mplayer.onended = function() {
   var status = false;
-  while (!status) {
-    status = playRandomSong();
-  }
+  status = playRandomSong();
+  setTimeout(function reRequestSong() {
+    if (status = false) {
+      status = playRandomSong();
+      setTimeout(reRequestSong, 300);
+    }
+  }, 300);
   selectRandomBg();
 };
