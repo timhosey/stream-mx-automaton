@@ -91,9 +91,9 @@ mplayer.ontimeupdate = (event) => {
   var title = document.getElementById("songtitle");
   var album = document.getElementById("songalbum");
 
-  artist.innerText = json['artist'];
-  title.innerText = json['title'];
-  album.innerText = json['album'];
+  artist.innerText = songDetails['artist'];
+  title.innerText = songDetails['title'];
+  album.innerText = songDetails['album'];
 };
 
 mplayer.onended = function() {
