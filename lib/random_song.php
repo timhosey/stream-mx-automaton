@@ -66,9 +66,9 @@ require_once('getid3/getid3.php');
   // $id3Data['artist'] = $tag['tags']['id3v2']['artist'];
   // $id3Data['title'] = $tag['tags']['id3v2']['title'];
   // $id3Data['album'] = $tag['tags']['id3v2']['album'];
-  $id3Data['artist'] = $tag['comments_html']['artist'];
-  $id3Data['title'] = $tag['comments_html']['title'];
-  $id3Data['album'] = $tag['comments_html']['album'];
+  $id3Data['artist'] = $tag['html_comments']['artist'];
+  $id3Data['title'] = $tag['html_comments']['title'];
+  $id3Data['album'] = $tag['html_comments']['album'];
   $id3Data['length'] = $tag['playtime_seconds'];
 
   header("Content-Type: application/json");
