@@ -66,6 +66,7 @@ require_once('getid3/getid3.php');
   // $id3Data['artist'] = $tag['tags']['id3v2']['artist'];
   // $id3Data['title'] = $tag['tags']['id3v2']['title'];
   // $id3Data['album'] = $tag['tags']['id3v2']['album'];
+  print_r($tag);
   $id3Data['artist'] = $tag['html_comments']['artist'];
   $id3Data['title'] = $tag['html_comments']['title'];
   $id3Data['album'] = $tag['html_comments']['album'];
