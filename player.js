@@ -96,14 +96,23 @@ mplayer.ontimeupdate = (event) => {
   album.innerText = songDetails['album'];
 };
 
+var play_status = false;
+
 mplayer.onended = function() {
-  var status = false;
-  status = playRandomSong();
+  console.log("Song ended. Resetting play status and randomizing song...");
+  play_status = false;
+  playRandomSong();
   setTimeout(function reRequestSong() {
-    if (status = false) {
-      status = playRandomSong();
+    if (play_status = false) {
+      console.log("Nothing playing. Re-randomizing song...");
+      playRandomSong();
       setTimeout(reRequestSong, 300);
     }
-  }, 300);
+  }, 1000);
   selectRandomBg();
+};
+
+mplayer.onplay = function() {
+  console.log("Song started. Marking play status as true.")
+  play_status = true;
 };
