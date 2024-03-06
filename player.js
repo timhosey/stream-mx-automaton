@@ -97,6 +97,7 @@ mplayer.ontimeupdate = (event) => {
 };
 
 var play_status = false;
+var play_spot = 0;
 
 mplayer.onended = function() {
   console.log("Song ended. Resetting play status and randomizing song...");
@@ -116,3 +117,16 @@ mplayer.onplay = function() {
   console.log("Song started. Marking play status as true.")
   play_status = true;
 };
+
+// Runs a check every five seconds to see if the time is stuck. If it's the same as it was five seconds ago,
+// we re-randomize.
+
+time_checker = setInterval(function() {
+  play_spot = mplayer.currentTime;
+  if (play_spot == play_checker) {
+    console.log("Timer hasn't moved in 5 seconds. Randomizing song...");
+    playRandomSong();
+    selectRandomBg();
+  }
+  play_checker = play_spot;
+}, 5000);
