@@ -121,6 +121,8 @@ mplayer.onplay = function() {
 // Runs a check every five seconds to see if the time is stuck. If it's the same as it was five seconds ago,
 // we re-randomize.
 
+var play_checker = null;
+
 time_checker = setInterval(function() {
   play_spot = mplayer.currentTime;
   if (play_spot == play_checker) {
